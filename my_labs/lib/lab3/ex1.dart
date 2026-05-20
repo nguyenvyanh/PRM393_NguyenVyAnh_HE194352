@@ -12,21 +12,22 @@ class Product {
 
   @override
   String toString() {
-    return 'Product(id: $id, name: $name, price: \$${price.toStringAsFixed(2)})';
+    return 'Product(id: $id, name: $name, price: $price)';
   }
 }
 
 class ProductRepository {
   final List<Product> _products = [
-    Product(id: 1, name: 'Laptop', price: 1200.00),
-    Product(id: 2, name: 'Mouse', price: 25.50),
+    Product(id: 1, name: 'Laptop', price: 1200),
+    Product(id: 2, name: 'Mouse', price: 25),
+    Product(id: 3, name: 'Keyboard', price: 75),
   ];
 
   final StreamController<Product> _controller =
       StreamController<Product>.broadcast();
 
   Future<List<Product>> getAll() async {
-    await Future.delayed(Duration(milliseconds: 500));
+    await Future.delayed(Duration(seconds: 1));
     return _products;
   }
 
@@ -36,7 +37,7 @@ class ProductRepository {
 
   void addProduct(Product product) {
     _products.add(product);
-    _controller.add(product); 
+    _controller.add(product);
   }
 
   void dispose() {
@@ -47,21 +48,28 @@ class ProductRepository {
 Future<void> main() async {
   final repo = ProductRepository();
 
+  print('Exercise 1: Product Model & Repository');
+  print('Loading all products...');
+
   final products = await repo.getAll();
+
   print('All products:');
   for (final product in products) {
     print(product);
   }
 
+  print('\nListening for new products...');
+
   final subscription = repo.liveAdded().listen((product) {
-    print('Live added: $product');
+    print('New product added: $product');
   });
 
-  repo.addProduct(Product(id: 3, name: 'Keyboard', price: 75.00));
-  repo.addProduct(Product(id: 4, name: 'Monitor', price: 300.00));
+  repo.addProduct(Product(id: 4, name: 'Monitor', price: 300));
+  repo.addProduct(Product(id: 5, name: 'Headphone', price: 50));
 
-  await Future.delayed(Duration(milliseconds: 300));
+  await Future.delayed(Duration(milliseconds: 500));
 
   await subscription.cancel();
   repo.dispose();
+
 }
