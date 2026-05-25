@@ -24,7 +24,6 @@ class User {
 }
 
 class UserRepository {
-  // Simulates fetching JSON data from an API.
   Future<List<User>> fetchUsers() async {
     await Future.delayed(Duration(milliseconds: 500));
 
