@@ -1,43 +1,73 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import '../models/budget_item.dart';
+import '../utils/money_formatter.dart';
 
-class DonutChartPainter extends CustomPainter {
-  final List<BudgetItem> items;
+class BudgetItemCard extends StatelessWidget {
+  final BudgetItem item;
 
-  DonutChartPainter(this.items);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final total = items.fold<double>(0, (sum, item) => sum + item.percent);
-    final center = Offset(size.width / 2, size.height / 2);
-    final radius = math.min(size.width, size.height) / 2.3;
-    final strokeWidth = radius * 0.42;
-
-    double startAngle = -math.pi / 2;
-
-    for (final item in items) {
-      final sweepAngle = (item.percent / total) * math.pi * 2;
-
-      final paint = Paint()
-        ..color = item.color
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = strokeWidth;
-
-      canvas.drawArc(
-        Rect.fromCircle(center: center, radius: radius),
-        startAngle,
-        sweepAngle,
-        false,
-        paint,
-      );
-
-      startAngle += sweepAngle;
-    }
-  }
+  const BudgetItemCard({
+    super.key,
+    required this.item,
+  });
 
   @override
-  bool shouldRepaint(covariant DonutChartPainter oldDelegate) {
-    return oldDelegate.items != items;
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.all(14),
+      decoration: BoxDecoration(
+        color: const Color(0xff1c292b),
+        borderRadius: BorderRadius.circular(14),
+        border: Border(
+          left: BorderSide(color: item.color, width: 4),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withAlpha(70),
+            blurRadius: 12,
+            offset: const Offset(0, 6),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          Icon(item.icon, color: item.color, size: 34),
+          const SizedBox(width: 14),
+
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  item.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 5),
+                Text(
+                  'Estimated ${formatMoney(item.amount)}đ',
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                  ),
+                ),
+                Text(
+                  item.status,
+                  style: TextStyle(
+                    color: Colors.green.shade300,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          const Icon(Icons.more_vert, color: Colors.white70),
+        ],
+      ),
+    );
   }
 }
