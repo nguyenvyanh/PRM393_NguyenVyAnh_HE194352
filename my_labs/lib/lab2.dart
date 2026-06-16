@@ -149,7 +149,7 @@ void main() async{
   String? name;
   print(name ?? "No name available");
   name = "Vy Anh";
-  print(name!);
+  print(name);
 
   print("-Stream Example-");
   countStream().listen((value) { 

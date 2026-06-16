@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Notebook",
+    "category": "Stationery",
+    "price": 25000
+  },
+  {
+    "id": 2,
+    "name": "Wireless Mouse",
+    "category": "Technology",
+    "price": 150000
+  },
+  {
+    "id": 3,
+    "name": "Water Bottle",
+    "category": "Lifestyle",
+    "price": 80000
+  }
+]

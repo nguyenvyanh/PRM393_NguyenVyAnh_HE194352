@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Nguyen Vy Anh",
+    "major": "Software Engineering",
+    "score": 8.8
+  },
+  {
+    "id": 2,
+    "name": "Tran Yen Nhi",
+    "major": "Business Administration",
+    "score": 9.1
+  },
+  {
+    "id": 3,
+    "name": "Dang Quoc Minh",
+    "major": "Artificial Intelligence",
+    "score": 8.6
+  },
+  {
+    "id": 4,
+    "name": "Ngo Duc Luong",
+    "major": "Finance Technology",
+    "score": 8.4
+  }
+]
