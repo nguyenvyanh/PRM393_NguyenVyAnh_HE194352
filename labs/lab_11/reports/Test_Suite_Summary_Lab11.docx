@@ -1,0 +1,93 @@
+LAB 11.5 — TEST SUITE SUMMARY
+
+Student Name: Nguyễn Vy Anh
+Student ID: HE194352
+Project: Taskly App
+
+1. Test Suite Overview
+
+This test suite was created for the Taskly Flutter application. The purpose of the suite is to validate the application logic, user interface behavior, navigation behavior, and an end-to-end task editing flow.
+
+2. Test Structure
+
+The test folder is organized as follows:
+
+test/
+  unit/
+    task_model_test.dart
+    task_repository_test.dart
+
+  widget/
+    task_list_widget_test.dart
+    task_navigation_test.dart
+    task_integration_test.dart
+
+  integration/
+    task_integration_test.dart
+
+3. Number of Tests
+
+The test suite includes the following tests:
+
+Unit Tests:
+1. Task default completed value is false
+2. Task toggle switches completed from false to true
+3. Task toggle switches completed from true to false
+4. TaskRepository addTask adds a task
+5. TaskRepository deleteTask removes a task
+6. TaskRepository updateTask updates an existing task
+
+Widget Tests:
+7. TaskListScreen shows empty state
+8. TaskListScreen adds a task and updates UI
+9. TaskListScreen adds multiple tasks and displays both
+
+Navigation Test:
+10. Tapping a task navigates to TaskDetailScreen
+
+Integration Flow Test:
+11. Add task, open detail screen, edit title, save, and verify updated title in list
+
+4. Types of Tests
+
+Unit Testing:
+Used to test pure Dart logic in the Task model and TaskRepository.
+
+Widget Testing:
+Used to test UI rendering and user interaction in TaskListScreen.
+
+Navigation Testing:
+Used to test screen transition from TaskListScreen to TaskDetailScreen.
+
+Integration-style Testing:
+Used to simulate a complete user flow including adding, editing, saving, and verifying task updates.
+
+5. Behaviors Validated
+
+The test suite validates:
+- Task completed value is false by default
+- Task toggle works correctly
+- TaskRepository can add tasks
+- TaskRepository can delete tasks
+- TaskRepository can update tasks
+- Empty task list displays correct message
+- User can add one task
+- User can add multiple tasks
+- User can open the detail screen
+- Detail screen contains title “Task Detail”
+- Detail screen contains TextField with key detailTitleField
+- User can edit and save an updated task title
+
+6. Known Limitations
+
+The app currently stores data only in memory, so tasks are lost when the app is restarted. The integration test is implemented as a Flutter widget-based flow test instead of a full physical-device integration_test package. The app also does not include validation messages for empty task input.
+
+7. Test Command
+
+The full test suite can be executed using:
+
+flutter test
+
+8. Conclusion
+
+The Taskly application has a complete test suite covering model logic, repository logic, UI behavior, navigation, and a full task editing flow. All required lab testing objectives were addressed.

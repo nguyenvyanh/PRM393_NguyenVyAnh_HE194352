@@ -1,0 +1,41 @@
+LAB 11.4 — DEVTOOLS DEBUGGING REPORT
+
+Student Name: Nguyễn Vy Anh
+Student ID: HE194352
+Project: Taskly App
+
+1. Overview
+
+In this lab, Flutter DevTools was used to inspect the Taskly application during debug mode. The main tools used were Widget Inspector and Performance Timeline. The purpose was to identify possible layout and performance issues while testing the application UI.
+
+2. Widget Inspector Observation
+
+The Widget Inspector showed that the Taskly app is built with a MaterialApp, Scaffold, AppBar, Column, TextField, IconButton, and a dynamic content area. When there are no tasks, the screen displays the empty state message: “No tasks yet. Add one!”. After adding tasks, the UI changes to a ListView containing ListTile widgets.
+
+3. Potential Layout Issue
+
+One potential layout issue is that the input row at the top of the screen may become crowded on small screens. The TextField and add button are placed in a Row. If the screen width is very small, the input area may not have enough horizontal space.
+
+Suggested improvement:
+Use responsive layout, reduce padding on small screens, or place the add button below the input field when the width is limited.
+
+4. Performance Timeline Observation
+
+The Performance Timeline showed that adding, updating, and deleting tasks caused widget rebuilds. In this small app, the rebuilds are acceptable because the number of widgets is small.
+
+5. Potential Performance Issue
+
+A potential performance issue may appear when the task list becomes very large. Updating one task currently calls notifyListeners(), which causes the TaskListScreen to rebuild. For a small list this is fine, but for hundreds or thousands of tasks, unnecessary rebuilds may affect performance.
+
+Suggested improvement:
+Use more fine-grained state management or optimize list rendering. ListView.builder is already a good choice because it builds visible items lazily.
+
+6. How Tests and DevTools Help
+
+Unit tests help detect logic errors in the Task model and TaskRepository. Widget tests verify that the UI displays correct content after user actions. Navigation tests ensure that tapping a task opens the detail screen correctly. The integration test validates a complete user flow from adding a task to editing and saving it.
+
+DevTools helps inspect the widget tree, detect layout problems, and observe performance behavior during interaction. Together, automated tests and DevTools make debugging easier and improve app reliability.
+
+7. Conclusion
+
+The Taskly app was tested using unit tests, widget tests, navigation tests, and integration-style testing. Flutter DevTools was used to inspect UI structure and performance. The app works correctly for the required lab scenarios.

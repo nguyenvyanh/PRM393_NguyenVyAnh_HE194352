@@ -9,7 +9,7 @@ Future<void> main() async {
   await _initializeFirebaseIfAvailable();
   await NotificationService.instance.init();
   runApp(const Lab10App());
-}
+} 
 
 Future<void> _initializeFirebaseIfAvailable() async {
   try {
